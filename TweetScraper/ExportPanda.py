@@ -1,14 +1,20 @@
 import pandas as pd
 import glob
 import json
+import os
 
-files = glob.glob('tweet/*')
-#files = glob.glob('user/*')
+print(os.getcwd())
+os.chdir("../")
+print(os.getcwd())
+files = glob.glob('tweet',*, recursive= False)
+print(files)
+
 len(files)
 
 dictlist = []
 
 for file in files:
+    print("You've solved the path problem! Hooray!")
     json_string = open(file, 'r').read()
     json_dict = json.loads(json_string)
     dictlist.append(json_dict)

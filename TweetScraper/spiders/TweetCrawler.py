@@ -20,8 +20,12 @@ logger = logging.getLogger(__name__)
 
 
 class TweetScraper(CrawlSpider):
+    #scraped_count = collections.defaultdict(int)
+    limit = 1000
+    completed_requests = 0
     name = 'TweetScraper'
     allowed_domains = ['twitter.com']
+    custom_settings = {"CLOSESPIDER_ITEMCOUNT": 1000}
 
     def __init__(self, query='', lang='', crawl_user=False, top_tweet=False):
 
@@ -39,7 +43,7 @@ class TweetScraper(CrawlSpider):
         url = self.url % (quote(self.query), '')
         yield http.Request(url, callback=self.parse_page)
 
-    def parse_page(self, response):
+    def parse_page(self, response):                            #**************
         # inspect_response(response, self)
         # handle current page
         data = json.loads(response.body.decode("utf-8"))
@@ -61,7 +65,7 @@ class TweetScraper(CrawlSpider):
             yield item
 
     def parse_tweet_item(self, items):
-        for item in items:
+        for item in items: #************************
             try:
                 tweet = Tweet()
 
@@ -165,7 +169,13 @@ class TweetScraper(CrawlSpider):
                 # raise
 
     def extract_one(self, selector, xpath, default=None):
+        self.completed_requests = 0
         extracted = selector.xpath(xpath).extract()
+        if (self.completed_requests > self.limit):
+            return default
+
         if extracted:
             return extracted[0]
+
+        self.completed_requests+=1
         return default
