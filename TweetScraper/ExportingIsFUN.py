@@ -9,7 +9,7 @@ os.chdir("Data/tweet")
 #print(os.listdir())
 
 files = os.listdir()
-print(files)
+#print(files)
 
 dict = []
 
@@ -30,5 +30,6 @@ df
 
 # Export to csv
 df.to_csv("data.csv")
+print("The tweets are now in a CSV! :D")
 
 
