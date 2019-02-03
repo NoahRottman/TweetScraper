@@ -1,4 +1,5 @@
 import textblob
+import sys
 from textblob import TextBlob
 import os
 import pandas as pd
@@ -17,24 +18,29 @@ text = data.text.tolist()
 date = data.datetime.tolist()
 text_and_date = np.column_stack((text, date))
 score = []
+subjectivity = []
 avg = 0
 cnt = 0
 pos = 0
 neg = 0
 neutral = 0
 for i in range(len(text)):
-    temp = TextBlob(text[i]).sentiment.polarity
-    score.append(temp)
-    avg += temp
+    polar = TextBlob(text[i]).sentiment.polarity
+    score.append(polar)
+    subject = TextBlob(text[i]).sentiment.subjectivity
+    subjectivity.append(subject)
+    avg += polar
     cnt += 1
-    if temp > 0:
+    if polar > 0:
         pos += 1
-    elif temp == 0:
+    elif polar == 0:
         neutral+=1
     else:
         neg += 1
     #print(text[i], ": ", temp)
-text_and_date = np.column_stack((date, text, score))
+
+date_text_score = np.column_stack((date, text, score, subjectivity))
+np.savetxt(sys.stdout, date_text_score, fmt='%s')
 avge = avg/cnt
 print("Average: ", avge)
 print("Positive: ", pos)
