@@ -4,6 +4,7 @@ from textblob import TextBlob
 import os
 import pandas as pd
 import numpy as np
+import json
 
 
 #path = os.getcwd()
@@ -24,6 +25,7 @@ cnt = 0
 pos = 0
 neg = 0
 neutral = 0
+j=0
 for i in range(len(text)):
     polar = TextBlob(text[i]).sentiment.polarity
     score.append(polar)
@@ -40,10 +42,19 @@ for i in range(len(text)):
     #print(text[i], ": ", temp)
 
 date_text_score = np.column_stack((date, text, score, subjectivity))
-np.savetxt(sys.stdout, date_text_score, fmt='%s')
+#np.savetxt(sys.stdout, date_text_score, fmt='%s')
+
+dict = [{"date": date[j], "text": text[j], "score": score[j], "subjectivity": subjectivity[j]} for j in range(1, len(text))]
+jsonify = json.dumps(dict)
+print(jsonify)
+
+#np.savetxt(sys.stdout, jsonify, fmt='%s')
+
+#pd.Series(date_text_score).to_json(orient='split')
 avge = avg/cnt
 print("Average: ", avge)
 print("Positive: ", pos)
 print("neutral", neutral)
 print("Negative: ", neg)
+#print(score[i] for i in range(0, len(text)))
 
