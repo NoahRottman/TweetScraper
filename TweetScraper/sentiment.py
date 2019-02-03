@@ -1,7 +1,8 @@
 import textblob
 from textblob import TextBlob
 import os
-import pandas
+import pandas as pd
+import numpy as np
 
 
 #path = os.getcwd()
@@ -11,8 +12,10 @@ import pandas
 os.chdir("Data/tweet")
 
 colnames = ['number', 'ID', 'datetime', 'has_media', 'is_reply', 'is_retweet', 'medias', 'x', 'y', 'z', 'text', 'w', 's', 't']
-data = pandas.read_csv("data.csv", names=colnames)
+data = pd.read_csv("data.csv", names=colnames)
 text = data.text.tolist()
+date = data.datetime.tolist()
+text_and_date = np.column_stack((text, date))
 avg = 0
 cnt = 0
 pos = 0
