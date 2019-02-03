@@ -25,7 +25,7 @@ class TweetScraper(CrawlSpider):
     completed_requests = 0
     name = 'TweetScraper'
     allowed_domains = ['twitter.com']
-    custom_settings = {"CLOSESPIDER_ITEMCOUNT": 1000}
+    custom_settings = {"CLOSESPIDER_ITEMCOUNT": 1000} #HFGXGHJFHHFDGHJGCGH
 
     def __init__(self, query='', lang='', crawl_user=False, top_tweet=False):
 
@@ -81,6 +81,7 @@ class TweetScraper(CrawlSpider):
                     item.xpath('.//div[@class="js-tweet-text-container"]/p//text()').extract()).replace(' # ',
                                                                                                         '#').replace(
                     ' @ ', '@')
+                # print(tweet['text'])
                 if tweet['text'] == '':
                     # If there is not text, we ignore the tweet
                     continue

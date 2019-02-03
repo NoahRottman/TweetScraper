@@ -1,7 +1,7 @@
 import os
 import json
 
-#print(os.getcwd())
+print(os.getcwd())
 os.chdir("Data/tweet")
 
 #print(os.getcwd())
@@ -9,7 +9,6 @@ os.chdir("Data/tweet")
 
 files = os.listdir()
 #print(files)
-
 
 for file in files:
     if (file != '.DS_Store'): #Additional files to be ignored rn

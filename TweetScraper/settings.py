@@ -4,7 +4,8 @@
 USER_AGENT = 'noah.rottman@queensu.ca'
 
 # settings for spiders
-BOT_NAME = 'TweetScraper'
+#BOT_NAME = 'TweetScraper'
+BOT_NAME = 'noah'
 LOG_LEVEL = 'INFO'
 DOWNLOAD_HANDLERS = {'s3': None,} # from http://stackoverflow.com/a/31233576/2297751, TODO
 
