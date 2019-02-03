@@ -1,66 +1,68 @@
-# Introduction #
-`TweetScraper` can get tweets from [Twitter Search](https://twitter.com/search-home). 
-It is built on [Scrapy](http://scrapy.org/) without using [Twitter's APIs](https://dev.twitter.com/rest/public).
-The crawled data is not as *clean* as the one obtained by the APIs, but the benefits are you can get rid of the API's rate limits and restrictions. Ideally, you can get all the data from Twitter Search.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-**WARNING:** please be polite and follow the [crawler's politeness policy](https://en.wikipedia.org/wiki/Web_crawler#Politeness_policy).
- 
+## Available Scripts
 
-# Installation #
-It requires [Scrapy](http://scrapy.org/) and [PyMongo](https://api.mongodb.org/python/current/) (Also install [MongoDB](https://www.mongodb.org/) if you want to save the data to database). Setting up:
+In the project directory, you can run:
 
-    $ git clone https://github.com/jonbakerfish/TweetScraper.git
-    $ cd TweetScraper/
-    $ pip install -r requirements.txt  #add '--user' if you are not root
-	$ scrapy list
-	$ #If the output is 'TweetScraper', then you are ready to go.
+### `npm start`
 
-# Usage #
-1. Change the `USER_AGENT` in `TweetScraper/settings.py` to identify who you are
-	
-		USER_AGENT = 'your website/e-mail'
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-2. In the root folder of this project, run command like: 
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-		scrapy crawl TweetScraper -a query="foo,#bar"
+### `npm test`
 
-	where `query` is a list of keywords seperated by comma and quoted by `"`. The query can be any thing (keyword, hashtag, etc.) you want to search in [Twitter Search](https://twitter.com/search-home). `TweetScraper` will crawl the search results of the query and save the tweet content and user information. You can also use the following operators in each query (from [Twitter Search](https://twitter.com/search-home)):
-	
-	| Operator | Finds tweets... |
-	| --- | --- |
-	| twitter search | containing both "twitter" and "search". This is the default operator. |
-	| **"** happy hour **"** | containing the exact phrase "happy hour". |
-	| love **OR** hate | containing either "love" or "hate" (or both). |
-	| beer **-** root | containing "beer" but not "root". |
-	| **#** haiku | containing the hashtag "haiku". |
-	| **from:** alexiskold | sent from person "alexiskold". |
-	| **to:** techcrunch | sent to person "techcrunch". |
-	| **@** mashable | referencing person "mashable". |
-	| "happy hour" **near:** "san francisco" | containing the exact phrase "happy hour" and sent near "san francisco". |
-	| **near:** NYC **within:** 15mi | sent within 15 miles of "NYC". |
-	| superhero **since:** 2010-12-27 | containing "superhero" and sent since date "2010-12-27" (year-month-day). |
-	| ftw **until:** 2010-12-27 | containing "ftw" and sent up to date "2010-12-27". |
-	| movie -scary **:)** | containing "movie", but not "scary", and with a positive attitude. |
-	| flight **:(** | containing "flight" and with a negative attitude. |
-	| traffic **?** | containing "traffic" and asking a question. |
-	| hilarious **filter:links** | containing "hilarious" and linking to URLs. |
-	| news **source:twitterfeed** | containing "news" and entered via TwitterFeed |
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-3. The tweets will be saved to disk in `./Data/tweet/` in default settings and `./Data/user/` is for user data. The file format is JSON. Change the `SAVE_TWEET_PATH` and `SAVE_USER_PATH` in `TweetScraper/settings.py` if you want another location.
+### `npm run build`
 
-4.  In you want to save the data to MongoDB, change the `ITEM_PIPELINES` in `TweetScraper/settings.py` from `TweetScraper.pipelines.SaveToFilePipeline` to `TweetScraper.pipelines.SaveToMongoPipeline`.
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### Other parameters
-* `lang[DEFAULT='']` allow to choose the language of tweet scrapped. This is not part of the query parameters, it is a different part in the search API URL
-* `top_tweet[DEFAULT=False]`, if you want to query only top_tweets or all of them
-* `crawl_user[DEFAULT=False]`, if you want to crawl users, author's of tweets in the same time
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-E.g.: `scrapy crawl TweetScraper -a query=foo -a crawl_user=True`
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run eject`
 
-# Acknowledgement #
-Keeping the crawler up to date requires continuous efforts, we thank all the [contributors](https://github.com/jonbakerfish/TweetScraper/graphs/contributors) for their valuable work.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-# License #
-TweetScraper is released under the [GNU GENERAL PUBLIC LICENSE, Version 2](https://github.com/jonbakerfish/TweetScraper/blob/master/LICENSE)
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
